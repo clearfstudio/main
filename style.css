@@ -1,0 +1,153 @@
+body {
+  margin: 0;
+  font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+  background-color: #fefefe;
+  color: #333;
+  text-align: center;
+  background-image: url('images/stripe-bg.png');
+  background-repeat: repeat;
+  background-size: 30px 30px;
+}
+
+.site-header {
+  background-color: white;
+  width: 70%;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px 10px;;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  position: relative;
+}
+
+.logo {
+  width: 500px;
+  margin: 20px auto;
+  display: block;
+}
+
+.catchcopy-wrapper {
+  background-color: white;         /* 背景白 */
+  width: 70%;                      /* 左右余白 */
+  max-width: 700px;                /* 最大幅（任意） */
+  margin: 30px auto;               /* 中央寄せ */
+  padding: 20px 10px;                   /* 内側余白 */
+  border-radius: 20px;             /* 角丸 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);  /* やさしい影 */
+  text-align: center;
+}
+
+.catchcopy {
+  font-size: 1.3em;
+  margin: 10px 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.line-deco {
+  width: 400px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+.app-list {
+  background-color: white;         /* 背景白 */
+  width: 70%;
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px 10px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.app-card {
+  border: 2px solid #52AAB3;       /* ← 濃いめの青緑に */
+  border-radius: 16px;
+  background-color: #e6f9ff;
+  margin: 15px auto;
+  max-width: 500px;
+  padding: 16px;
+  box-shadow: none;                /* ← 影なし！ */
+}
+
+.play-button {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background-color: #00bbff;
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.mobile-mark {
+  font-size: 1em;
+  color: #2e8b57;
+}
+
+.mobile-note {
+  font-size: 0.9em;
+  color: #777;
+  margin-top: 10px;
+}
+
+footer {
+  background-color: #f0f0f0;
+  padding: 20px;
+  font-size: 0.9em;
+}
+
+footer a {
+  display: block;
+  color: #0077aa;
+  text-decoration: none;
+  margin-top: 8px;
+}
+
+.app-thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap; /* モバイル対応 */
+}
+
+.thumb {
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.info-section {
+  background-color: white;
+  width: 70%;
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 30px 10px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  color: #333;
+  font-size: 1em;
+  line-height: 1.7;
+}
+
+.info-section h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.info-section a {
+  color: #0077aa;
+  text-decoration: underline;
+}
