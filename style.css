@@ -7,24 +7,88 @@ body {
   background-image: url('images/stripe-bg.png');
   background-repeat: repeat;
   background-size: 30px 30px;
+  padding-top: 130px;
+  padding-bottom: 80px;
+}
+
+p {
+  line-height: 1.4;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.info-section p {
+  line-height: 1.8;
+}
+
+h3 {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .site-header {
   background-color: white;
   width: 70%;
   max-width: 700px;
-  margin: 20px auto;
-  padding: 20px 10px;;
+  margin: 0 auto;
+  padding: 0 0;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 0 0 20px 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.genre-buttons {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 900;
+}
+
+.genre-btn {
+  padding: 10px 20px;
+  padding-top: 30Px;
+  font-size: 1em;
+  background-color: #fff8dc;
+  border: 2px solid #f5c06f;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
   position: relative;
 }
 
+.genre-btn:nth-child(1) {
+  transform: rotate(-2deg);
+}
+
+.genre-btn:nth-child(2) {
+  transform: rotate(2deg);
+}
+
+.disabled-btn {
+  transform: rotate(-2deg);
+  background-color: #cccccc;
+  border: 2px solid #aaaaaa;
+  pointer-events: none;
+  cursor: default;
+}
+
+.genre-btn:hover {
+  background-color: #fff0b3;
+}
+
+
 .logo {
-  width: 500px;
-  margin: 20px auto;
+  width: 450px;
+  margin: 0 auto;
   display: block;
 }
 
@@ -40,7 +104,7 @@ body {
 }
 
 .catchcopy {
-  font-size: 1.3em;
+  font-size: 1em;
   margin: 10px 0;
   margin-bottom: 20px;
   color: #333;
@@ -74,7 +138,7 @@ body {
   background-color: #e6f9ff;
   margin: 15px auto;
   max-width: 500px;
-  padding: 16px;
+  padding: 10px;
   box-shadow: none;                /* ← 影なし！ */
 }
 
@@ -102,9 +166,19 @@ body {
 
 footer {
   background-color: #f0f0f0;
-  padding: 20px;
+  padding: 5px;
   font-size: 0.9em;
+  
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  text-align: center;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 800;
 }
+
 
 footer a {
   display: block;

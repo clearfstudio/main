@@ -8,46 +8,85 @@
 </head>
 <body>
 <header class="site-header">
-  <img src="logo.png" alt="まなろっとスタジオ ロゴ" class="logo">
+  <img src="logo2.png" alt="まなろっとスタジオ ロゴ" class="logo">
 </header>
+  <div class="genre-buttons">
+  <button class="genre-btn" data-genre="typing">タイピング</button>
+  <button class="genre-btn" data-genre="math">さんすう</button>
+  <button class="genre-btn disabled-btn">さくせいちゅう…</button>
+</div>
 
 
   <main>
+    <div id="main-content">
     <div class="catchcopy-wrapper">
       <h1 class="catchcopy">たのしく　たくさん　まなべるサイト</h1>
-      <img src="images/line.png" alt="ライン" class="line-deco">
       <p>このサイトには、　だれでも　つかえる　がくしゅうよう　アプリが　あります。</p>
       <p>たくさん　あそんで　たのしく　まなぼう！</p>
     </div>
+    </div>
 
-    <section class="app-list">
-      <h2>あそべるアプリ</h2>
-      <p class="mobile-note">📱マークのついたアプリはスマホでもあそべます</p>
+  </main>
+
+<footer>
+    <a href="okuduke.html">教育関係者・保護者の方へ</a>
+  <p>© 2025 Clearf Studio</p>
+</footer>
+<script>
+  // アプリごとのHTMLテンプレート（あとで中身を拡張可能）
+  const genreTemplates = {
+    typing: `
       <div class="app-card">
         <h3>タイピングチャレンジ</h3>
         <div class="app-thumbnails">
             <img src="images/typing1.png" alt="画像" class="thumb">
             <img src="images/typing2.png" alt="画像" class="thumb">
         </div>
-        <p>キーを打ってスコアを競おう！</p>
-        <a href="https://clearfstudio.github.io/manalot-typing/" class="play-button">▶ あそぶ</a>
+        <p>しょうがくせいのための　タイピングれんしゅうアプリ<br>タイピングマスターを　めざそう</p>
+        <a href="https://clearfstudio.github.io/manalot-typing/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
       </div>
+    `,
+    math: `
       <div class="app-card">
-        <h3>いくつといくつ <span class="mobile-mark">📱</span></h3>
+        <h3>いくつといくつ <span class="mobile-mark">📱</span>スマホOK</h3>
         <div class="app-thumbnails">
             <img src="images/ikutsu1.png" alt="画像" class="thumb">
             <img src="images/ikutsu2.png" alt="画像" class="thumb">
         </div>
-        <p>かずの分け方・つくり方を学ぼう！</p>
-        <a href="https://clearfstudio.github.io/manalot-ikutsu/" class="play-button">▶ あそぶ</a>
+        <p>かずをつくる　モードと　かずをわける　モードがあるよ<br>なんかいでも　れんしゅうしよう</p>
+        <a href="https://clearfstudio.github.io/manalot-ikutsu/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
       </div>
-    </section>
-  </main>
+      <div class="app-card">
+        <h3>かたちをつくろう　せんでつなごう</h3>
+        <div class="app-thumbnails">
+            <img src="images/katachisen1.png" alt="画像" class="thumb">
+            <img src="images/katachisen2.png" alt="画像" class="thumb">
+        </div>
+        <p>てんと　てんを　おして　せんをかこう<br>せんで　いろいろな　かたちを　つくろう</p>
+        <a href="https://clearfstudio.github.io/manalot-sen/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
+      </div>
+      <div class="app-card">
+        <h3>めざせ九九マスター！ <span class="mobile-mark">📱</span>スマホOK</h3>
+        <div class="app-thumbnails">
+            <img src="images/kuku1.png" alt="画像" class="thumb">
+            <img src="images/kuku2.png" alt="画像" class="thumb">
+        </div>
+        <p>九九にちょうせん！<br>九九マスターを　めざして　れんしゅうしよう</p>
+        <a href="https://clearfstudio.github.io/manalot-kuku/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
+      </div>
+    `
+  };
 
-<footer>
-  <p>© 2025 Clearf Studio</p>
-  <a href="okuduke.html">教育関係者・保護者の方へ</a>
-</footer>
+  // ボタンクリックでメインエリアを書き換える
+  document.querySelectorAll('.genre-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const genre = btn.dataset.genre;
+      if (genre && genreTemplates[genre]) {
+        document.getElementById('main-content').innerHTML = genreTemplates[genre];
+      }
+    });
+  });
 
+</script>
 </body>
 </html>
