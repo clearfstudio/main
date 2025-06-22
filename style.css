@@ -7,7 +7,7 @@ body {
   background-image: url('images/stripe-bg.png');
   background-repeat: repeat;
   background-size: 30px 30px;
-  padding-top: 130px;
+  padding-top: 135px;
   padding-bottom: 80px;
 }
 
@@ -15,6 +15,11 @@ p {
   line-height: 1.4;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 .info-section p {
@@ -53,8 +58,8 @@ h3 {
 }
 
 .genre-btn {
-  padding: 10px 20px;
-  padding-top: 30Px;
+  padding: 5px 15px;
+  padding-top: 35Px;
   font-size: 1em;
   background-color: #fff8dc;
   border: 2px solid #f5c06f;
@@ -72,9 +77,13 @@ h3 {
 .genre-btn:nth-child(2) {
   transform: rotate(2deg);
 }
+.genre-btn:nth-child(3) {
+  transform: rotate(-2deg);
+}
+
 
 .disabled-btn {
-  transform: rotate(-2deg);
+  transform: rotate(2deg);
   background-color: #cccccc;
   border: 2px solid #aaaaaa;
   pointer-events: none;
@@ -87,7 +96,7 @@ h3 {
 
 
 .logo {
-  width: 450px;
+  width: 550px;
   margin: 0 auto;
   display: block;
 }
@@ -224,4 +233,61 @@ footer a {
 .info-section a {
   color: #0077aa;
   text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+.genre-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2列のグリッド */
+  gap: 5px; /* ボタン間の余白 */
+  width: 90%;
+  margin: 20px auto; /* 中央寄せ */
+  padding: 0 10px;
+}
+
+.genre-btn {
+  font-size: 12px;
+  padding: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  transform: none !important;
+}
+
+
+  .catchcopy {
+    font-size: 1.5em;
+    line-height: 1.4;
+  }
+
+  .app-card {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  .app-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .thumb {
+    width: 100px;
+    height: auto;
+  }
+
+  footer {
+    font-size: 0.9em;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .logo {
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
 }
