@@ -36,7 +36,7 @@
   <p>© 2025 Clearf Studio</p>
 </footer>
 <script>
-  // アプリごとのHTMLテンプレート（あとで中身を拡張可能）
+
   const genreTemplates = {
     typing: `
       <div class="app-card">
@@ -58,6 +58,15 @@
         </div>
         <p>かずをつくる　モードと　かずをわける　モードがあるよ<br>なんかいでも　れんしゅうしよう</p>
         <a href="https://clearfstudio.github.io/manalot-ikutsu/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
+      </div>
+      <div class="app-card">
+        <h3>けいさんカード</h3>
+        <div class="app-thumbnails">
+            <img src="images/keisan1.png" alt="画像" class="thumb">
+            <img src="images/keisan2.png" alt="画像" class="thumb">
+        </div>
+        <p>１０までの　シンプルなけいさんカード<br>ぜんぶせいかいするまでの　タイムをはかるよ<br>なんかいでも　れんしゅうしよう</p>
+        <a href="https://clearfstudio.github.io/manalot-keisancard/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
       </div>
       <div class="app-card">
         <h3>かたちをつくろう　せんでつなごう</h3>
@@ -90,6 +99,16 @@
         <a href="https://clearfstudio.github.io/manalot-ikutsu/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
       </div>
       <div class="app-card">
+        <h3>けいさんカード　<span class="mobile-mark">📱</span>スマホたいおう</h3>
+        <div class="app-thumbnails">
+            <img src="images/keisan1.png" alt="画像" class="thumb">
+            <img src="images/keisan2.png" alt="画像" class="thumb">
+        </div>
+        <p>１０までの　シンプルなけいさんカード<br>ぜんぶせいかいするまでの　タイムをはかるよ<br>なんかいでも　れんしゅうしよう
+          <br>たてでも　よこでも　あそべます</p>
+        <a href="https://clearfstudio.github.io/manalot-keisancard/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
+      </div>
+      <div class="app-card">
         <h3>めざせ九九マスター！ <span class="mobile-mark">📱</span>スマホよう</h3>
         <div class="app-thumbnails">
             <img src="images/kuku1.png" alt="画像" class="thumb">
@@ -101,7 +120,7 @@
     `
   };
 
-  // ボタンクリックでメインエリアを書き換える
+
   document.querySelectorAll('.genre-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const genre = btn.dataset.genre;
