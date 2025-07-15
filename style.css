@@ -296,3 +296,17 @@ footer a {
  }
 
 }
+
+    .info-block {
+      margin-bottom: 24px;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    .centered-block {
+      text-align: center;
+    }
+
+    .support-button {
+      margin-top: 16px;
+    }
