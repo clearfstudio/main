@@ -59,8 +59,9 @@ h3 {
 
 .genre-btn {
   padding: 5px 15px;
-  padding-top: 35Px;
+  padding-top: 35px;
   font-size: 1em;
+  flex-shrink: 0;
   background-color: #fff8dc;
   border: 2px solid #f5c06f;
   border-radius: 10px;
