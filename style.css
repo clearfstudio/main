@@ -7,7 +7,7 @@ body {
   background-image: url('images/stripe-bg.png');
   background-repeat: repeat;
   background-size: 30px 30px;
-  padding-top: 200px;
+  padding-top: 180px;
   padding-bottom: 80px;
 }
 
@@ -85,6 +85,9 @@ h3 {
 }
 .genre-btn:nth-child(5) {
   transform: rotate(-2deg);
+}
+.genre-btn:nth-child(6) {
+  transform: rotate(2deg);
 }
 
 .disabled-btn {
@@ -241,6 +244,10 @@ footer a {
 }
 
 @media screen and (max-width: 768px) {
+
+body {
+  padding-top: 210px;
+}
 .genre-buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2列のグリッド */
