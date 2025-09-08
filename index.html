@@ -6,9 +6,7 @@
   <title>まなろっとスタジオ</title>
 
   <style>
-    /* ===============================
-       ベース
-    =============================== */
+
     :root{
       --bg:#fefefe;
       --paper:#fff;
@@ -22,7 +20,7 @@
       --radius-lg:20px;
       --radius-md:16px;
       --radius-pill:999px;
-      --header-h:140px; /* ロゴ高さに合わせて調整 */
+      --header-h:140px;
       --footer-h:60px;
     }
 
@@ -33,18 +31,15 @@
       background: var(--bg) url('images/stripe-bg.png') repeat;
       background-size:30px 30px;
       color:var(--ink);
-      /* 固定ヘッダー/フッター分の余白 */
+
       padding-top:calc(var(--header-h) + 40px);
       padding-bottom:calc(var(--footer-h) + 20px);
-      text-align:center; /* 初期のみ。主要エリアでは上書き */
+      text-align:center;
     }
     img{max-width:100%; height:auto;}
     p{line-height:1.6; margin:5px 0;}
     h1,h2,h3{margin:6px 0;}
 
-    /* ===============================
-       ヘッダー（既存を尊重）
-    =============================== */
     .site-header{
       background:var(--paper);
       width:70%;
@@ -61,20 +56,16 @@
     }
     .logo{width:550px; display:block; margin:0 auto;}
 
-    /* ===============================
-       2カラムレイアウト（PC）
-    =============================== */
     .layout{
       width:92%;
       max-width:1200px;
       margin:0 auto;
       display:grid;
-      grid-template-columns:280px 1fr; /* 左ナビ / 右メイン */
+      grid-template-columns:280px 1fr;
       gap:20px;
       text-align:left;
     }
 
-    /* 左：ジャンル選択（PCで表示、モバイルでも使い回し） */
     .sidebar{
       background:var(--paper);
       border-radius:var(--radius-lg);
@@ -114,7 +105,6 @@
       font-weight:700;
     }
 
-    /* 右：コンテンツ */
     .content{
       display:block;
     }
@@ -128,7 +118,6 @@
     .catchcopy{ font-size:1.1rem; font-weight:700; text-align:center; }
     .catchcopy-wrapper{ text-align:center; }
 
-    /* アプリカード */
     .app-card{
       border:2px solid var(--brand);
       border-radius:var(--radius-md);
@@ -148,7 +137,6 @@
     }
     .mobile-mark{ font-size:1em; color:#2e8b57; }
 
-    /* 情報セクション（任意で継承） */
     .info-section{
       background:var(--paper);
       border-radius:var(--radius-lg);
@@ -159,9 +147,6 @@
     }
     .info-section a{ color:#0077aa; text-decoration:underline; }
 
-    /* ===============================
-       フッター（既存を尊重）
-    =============================== */
     footer{
       background:#f0f0f0;
       font-size:.9rem;
@@ -173,11 +158,6 @@
     }
     footer a{ color:#0077aa; text-decoration:none; }
 
-    /* ===============================
-       モバイル（「このまま」でOKの仕様を踏襲）
-       - 1カラム化
-       - ジャンルはグリッドボタン
-    =============================== */
     @media (max-width: 768px){
       :root{
         --header-h:100px;
@@ -212,16 +192,14 @@
   </style>
 </head>
 <body>
-  <!-- ヘッダー（そのまま） -->
+
   <header class="site-header">
     <a href="index.html">
       <img src="logo2.png" alt="まなろっとスタジオ ロゴ" class="logo">
     </a>
   </header>
 
-  <!-- 新：2カラムレイアウト -->
   <main class="layout">
-    <!-- 左：ジャンル選択（PCは縦リスト／モバイルはグリッド） -->
     <aside class="sidebar" aria-label="ジャンル選択">
       <div class="genre-nav">
         <button class="genre-btn" data-genre="typing" aria-pressed="false">タイピング</button>
@@ -233,7 +211,6 @@
       </div>
     </aside>
 
-    <!-- 右：コンテンツ -->
     <section class="content">
       <div id="main-content" class="panel">
         <div class="catchcopy-wrapper">
@@ -245,14 +222,12 @@
     </section>
   </main>
 
-  <!-- フッター（そのまま） -->
   <footer>
     <a href="okuduke.html">教育関係者・保護者の方へ</a>
     <p>© 2025 Clearf Studio</p>
   </footer>
 
   <script>
-    // 既存テンプレートをそのまま利用
     const genreTemplates = {
       typing: `
         <div class="app-card">
@@ -394,7 +369,6 @@
       `
     };
 
-    // クリックで右側に描画 & 選択状態を更新
     const main = document.getElementById('main-content');
     const buttons = document.querySelectorAll('.genre-btn');
 
@@ -409,11 +383,8 @@
         if(genre && genreTemplates[genre]){
           setActive(btn);
           main.innerHTML = genreTemplates[genre];
-          // スクロール（モバイルで下に埋まらないように）
-          main.scrollIntoView({behavior:'smooth', block:'start'});
         }
       });
-      // キーボード操作にも優しく
       btn.addEventListener('keydown',(e)=>{
         if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); btn.click(); }
       });
