@@ -4,196 +4,416 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>まなろっとスタジオ</title>
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ===============================
+       ベース
+    =============================== */
+    :root{
+      --bg:#fefefe;
+      --paper:#fff;
+      --ink:#333;
+      --brand:#52AAB3;
+      --brand-soft:#e6f9ff;
+      --accent:#00bbff;
+      --rail:#fff8dc;
+      --rail-border:#f5c06f;
+      --shadow:0 4px 12px rgba(0,0,0,.1);
+      --radius-lg:20px;
+      --radius-md:16px;
+      --radius-pill:999px;
+      --header-h:140px; /* ロゴ高さに合わせて調整 */
+      --footer-h:60px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Hiragino Kaku Gothic ProN', system-ui, -apple-system, sans-serif;
+      background: var(--bg) url('images/stripe-bg.png') repeat;
+      background-size:30px 30px;
+      color:var(--ink);
+      /* 固定ヘッダー/フッター分の余白 */
+      padding-top:calc(var(--header-h) + 40px);
+      padding-bottom:calc(var(--footer-h) + 20px);
+      text-align:center; /* 初期のみ。主要エリアでは上書き */
+    }
+    img{max-width:100%; height:auto;}
+    p{line-height:1.6; margin:5px 0;}
+    h1,h2,h3{margin:6px 0;}
+
+    /* ===============================
+       ヘッダー（既存を尊重）
+    =============================== */
+    .site-header{
+      background:var(--paper);
+      width:70%;
+      max-width:800px;
+      margin:0 auto;
+      padding:0;
+      text-align:center;
+      border-radius:0 0 var(--radius-lg) var(--radius-lg);
+      box-shadow:var(--shadow);
+      position:fixed; top:0; left:0; right:0;
+      z-index:1000;
+      height:var(--header-h);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .logo{width:550px; display:block; margin:0 auto;}
+
+    /* ===============================
+       2カラムレイアウト（PC）
+    =============================== */
+    .layout{
+      width:92%;
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:280px 1fr; /* 左ナビ / 右メイン */
+      gap:20px;
+      text-align:left;
+    }
+
+    /* 左：ジャンル選択（PCで表示、モバイルでも使い回し） */
+    .sidebar{
+      background:var(--paper);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+      padding:14px;
+      position:sticky;
+      top:calc(var(--header-h) + 12px);
+      align-self:start;
+    }
+    .sidebar h2{
+      font-size:1.05rem;
+      margin:4px 8px 10px;
+      text-align:left;
+    }
+    .genre-nav{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .genre-btn{
+      display:flex; align-items:center; justify-content:center;
+      width:100%;
+      padding:12px 16px;
+      background:var(--rail);
+      border:2px solid var(--rail-border);
+      border-radius:var(--radius-pill);
+      box-shadow:0 2px 4px rgba(0,0,0,.08);
+      cursor:pointer;
+      transition:transform .12s, background-color .2s, border-color .2s;
+      font-size:1rem;
+    }
+    .genre-btn:hover{ background:#fff0b3; }
+    .genre-btn[aria-pressed="true"]{
+      background:var(--brand-soft);
+      border-color:var(--brand);
+      transform:translateY(-1px);
+      font-weight:700;
+    }
+
+    /* 右：コンテンツ */
+    .content{
+      display:block;
+    }
+    .panel{
+      background:var(--paper);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+      padding:20px 14px;
+      margin-bottom:16px;
+    }
+    .catchcopy{ font-size:1.1rem; font-weight:700; text-align:center; }
+    .catchcopy-wrapper{ text-align:center; }
+
+    /* アプリカード */
+    .app-card{
+      border:2px solid var(--brand);
+      border-radius:var(--radius-md);
+      background:var(--brand-soft);
+      margin:16px auto;
+      max-width:640px;
+      padding:12px;
+      text-align: center;
+    }
+    .app-thumbnails{
+      display:flex; justify-content:center; gap:10px; margin-bottom:12px; flex-wrap:wrap;
+    }
+    .thumb{ width:200px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,.1); }
+    .play-button{
+      display:inline-block; margin-top:12px; padding:10px 20px;
+      background:var(--accent); color:#fff; text-decoration:none; border-radius:12px; font-weight:700;
+    }
+    .mobile-mark{ font-size:1em; color:#2e8b57; }
+
+    /* 情報セクション（任意で継承） */
+    .info-section{
+      background:var(--paper);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+      padding:24px 14px;
+      color:var(--ink);
+      line-height:1.7;
+    }
+    .info-section a{ color:#0077aa; text-decoration:underline; }
+
+    /* ===============================
+       フッター（既存を尊重）
+    =============================== */
+    footer{
+      background:#f0f0f0;
+      font-size:.9rem;
+      position:fixed; bottom:0; left:0; width:100%;
+      text-align:center; box-shadow:0 -2px 6px rgba(0,0,0,.1);
+      z-index:800; height:var(--footer-h);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+      padding:6px;
+    }
+    footer a{ color:#0077aa; text-decoration:none; }
+
+    /* ===============================
+       モバイル（「このまま」でOKの仕様を踏襲）
+       - 1カラム化
+       - ジャンルはグリッドボタン
+    =============================== */
+    @media (max-width: 768px){
+      body{ padding-top:calc(var(--header-h) + 70px); }
+      .logo{ max-width:90%; height:auto; margin:10px auto; }
+
+      .layout{ display:block; width:92%; }
+      .sidebar{
+        position:static;
+        margin-bottom:12px;
+      }
+      .sidebar h2{ text-align:center; }
+      .genre-nav{
+        display:grid;
+        grid-template-columns:repeat(2, 1fr);
+        gap:8px;
+        padding:0 2px;
+      }
+      .genre-btn{
+        border-radius:14px; font-size:.95rem; padding:10px;
+      }
+
+      .panel{ padding:14px 10px; }
+      .catchcopy{ font-size:1rem; line-height:1.4; }
+
+      .app-card{ margin:12px 0; padding:10px; font-size:1rem; }
+      .thumb{ width:120px; }
+      p{ font-size:.95rem; }
+    }
+  </style>
 </head>
 <body>
-<header class="site-header">
-  <a href="index.html">
-  <img src="logo2.png" alt="まなろっとスタジオ ロゴ" class="logo">
-  </a>
-</header>
-<nav class="genre-rail">
-  <div class="genre-list">
-    <button class="genre-btn" data-genre="typing">タイピング</button>
-    <button class="genre-btn" data-genre="japanese">こくご</button>
-    <button class="genre-btn" data-genre="math">さんすう</button>
-    <button class="genre-btn" data-genre="social">しゃかい</button>
-    <button class="genre-btn" data-genre="other">そのほか</button>
-    <button class="genre-btn" data-genre="smart">iPhone/Android</button>
-  </div>
-</nav>
+  <!-- ヘッダー（そのまま） -->
+  <header class="site-header">
+    <a href="index.html">
+      <img src="logo2.png" alt="まなろっとスタジオ ロゴ" class="logo">
+    </a>
+  </header>
 
+  <!-- 新：2カラムレイアウト -->
+  <main class="layout">
+    <!-- 左：ジャンル選択（PCは縦リスト／モバイルはグリッド） -->
+    <aside class="sidebar" aria-label="ジャンル選択">
+      <div class="genre-nav">
+        <button class="genre-btn" data-genre="typing" aria-pressed="false">タイピング</button>
+        <button class="genre-btn" data-genre="japanese" aria-pressed="false">こくご</button>
+        <button class="genre-btn" data-genre="math" aria-pressed="false">さんすう</button>
+        <button class="genre-btn" data-genre="social" aria-pressed="false">しゃかい</button>
+        <button class="genre-btn" data-genre="other" aria-pressed="false">そのほか</button>
+        <button class="genre-btn" data-genre="smart" aria-pressed="false">iPhone/Android</button>
+      </div>
+    </aside>
 
-  <main>
-    <div id="main-content">
-    <div class="catchcopy-wrapper">
-      <h1 class="catchcopy">たのしく　たくさん　まなべるサイト</h1>
-      <p>このサイトには、　だれでも　つかえる　がくしゅうよう　アプリが　あります。</p>
-      <p>たくさん　あそんで　たのしく　まなぼう！</p>
-    </div>
-    </div>
-
+    <!-- 右：コンテンツ -->
+    <section class="content">
+      <div id="main-content" class="panel">
+        <div class="catchcopy-wrapper">
+          <h1 class="catchcopy">たのしく　たくさん　まなべるサイト</h1>
+          <p>このサイトには、　だれでも　つかえる　がくしゅうよう　アプリが　あります。</p>
+          <p>たくさん　あそんで　たのしく　まなぼう！</p>
+        </div>
+      </div>
+    </section>
   </main>
 
-<footer>
+  <!-- フッター（そのまま） -->
+  <footer>
     <a href="okuduke.html">教育関係者・保護者の方へ</a>
-  <p>© 2025 Clearf Studio</p>
-</footer>
-<script>
+    <p>© 2025 Clearf Studio</p>
+  </footer>
 
-  const genreTemplates = {
-    typing: `
-      <div class="app-card">
-        <h3>タイピングチャレンジ</h3>
-        <div class="app-thumbnails">
-            <img src="images/typing1.png" alt="画像" class="thumb">
-            <img src="images/typing2.png" alt="画像" class="thumb">
+  <script>
+    // 既存テンプレートをそのまま利用
+    const genreTemplates = {
+      typing: `
+        <div class="app-card">
+          <h3>タイピングチャレンジ</h3>
+          <div class="app-thumbnails">
+              <img src="images/typing1.png" alt="画像" class="thumb">
+              <img src="images/typing2.png" alt="画像" class="thumb">
+          </div>
+          <p>しょうがくせいのための　タイピングれんしゅうアプリ<br>タイピングマスターを　めざそう</p>
+          <a href="https://clearfstudio.github.io/manalot-typing/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>しょうがくせいのための　タイピングれんしゅうアプリ<br>タイピングマスターを　めざそう</p>
-        <a href="https://clearfstudio.github.io/manalot-typing/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-    `,
-    japanese: `
-      <div class="app-card">
-        <h3>和同開珎　漢字パズル</h3>
-        <div class="app-thumbnails">
-            <img src="images/kanji1.png" alt="画像" class="thumb">
-            <img src="images/kanji2.png" alt="画像" class="thumb">
+      `,
+      japanese: `
+        <div class="app-card">
+          <h3>和同開珎　漢字パズル</h3>
+          <div class="app-thumbnails">
+              <img src="images/kanji1.png" alt="画像" class="thumb">
+              <img src="images/kanji2.png" alt="画像" class="thumb">
+          </div>
+          <p>矢印の方向に読めるように　４つの熟語を完成させよう！</p>
+          <a href="https://clearfstudio.github.io/manalot-kanjipuzzle/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>矢印の方向に読めるように　４つの熟語を完成させよう！</p>
-        <a href="https://clearfstudio.github.io/manalot-kanjipuzzle/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-    `,
-    math: `
-      <div class="app-card">
-        <h3>いくつといくつ</h3>
-        <div class="app-thumbnails">
-            <img src="images/ikutsu1.png" alt="画像" class="thumb">
-            <img src="images/ikutsu2.png" alt="画像" class="thumb">
+      `,
+      math: `
+        <div class="app-card">
+          <h3>いくつといくつ</h3>
+          <div class="app-thumbnails">
+              <img src="images/ikutsu1.png" alt="画像" class="thumb">
+              <img src="images/ikutsu2.png" alt="画像" class="thumb">
+          </div>
+          <p>かずをつくる　モードと　かずをわける　モードがあるよ<br>なんかいでも　れんしゅうしよう</p>
+          <a href="https://clearfstudio.github.io/manalot-ikutsu/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>かずをつくる　モードと　かずをわける　モードがあるよ<br>なんかいでも　れんしゅうしよう</p>
-        <a href="https://clearfstudio.github.io/manalot-ikutsu/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-      <div class="app-card">
-        <h3>けいさんカード</h3>
-        <div class="app-thumbnails">
-            <img src="images/keisan1.png" alt="画像" class="thumb">
-            <img src="images/keisan2.png" alt="画像" class="thumb">
+        <div class="app-card">
+          <h3>けいさんカード</h3>
+          <div class="app-thumbnails">
+              <img src="images/keisan1.png" alt="画像" class="thumb">
+              <img src="images/keisan2.png" alt="画像" class="thumb">
+          </div>
+          <p>１０までの　シンプルなけいさんカード<br>ぜんぶせいかいするまでの　タイムをはかるよ<br>なんかいでも　れんしゅうしよう</p>
+          <a href="https://clearfstudio.github.io/manalot-keisancard/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>１０までの　シンプルなけいさんカード<br>ぜんぶせいかいするまでの　タイムをはかるよ<br>なんかいでも　れんしゅうしよう</p>
-        <a href="https://clearfstudio.github.io/manalot-keisancard/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-      <div class="app-card">
-        <h3>かたちをつくろう　せんでつなごう</h3>
-        <div class="app-thumbnails">
-            <img src="images/katachisen1.png" alt="画像" class="thumb">
-            <img src="images/katachisen2.png" alt="画像" class="thumb">
+        <div class="app-card">
+          <h3>かたちをつくろう　せんでつなごう</h3>
+          <div class="app-thumbnails">
+              <img src="images/katachisen1.png" alt="画像" class="thumb">
+              <img src="images/katachisen2.png" alt="画像" class="thumb">
+          </div>
+          <p>てんと　てんを　おして　せんをかこう<br>せんで　いろいろな　かたちを　つくろう</p>
+          <a href="https://clearfstudio.github.io/manalot-sen/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>てんと　てんを　おして　せんをかこう<br>せんで　いろいろな　かたちを　つくろう</p>
-        <a href="https://clearfstudio.github.io/manalot-sen/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-      <div class="app-card">
-        <h3>かたちをつくろう　さんかくをならべよう</h3>
-        <div class="app-thumbnails">
-            <img src="images/katachisan1.png" alt="画像" class="thumb">
-            <img src="images/katachisan2.png" alt="画像" class="thumb">
+        <div class="app-card">
+          <h3>かたちをつくろう　さんかくをならべよう</h3>
+          <div class="app-thumbnails">
+              <img src="images/katachisan1.png" alt="画像" class="thumb">
+              <img src="images/katachisan2.png" alt="画像" class="thumb">
+          </div>
+          <p>さんかくを　かいてんさせて　ならべよう<br>ならべて　いろいろな　かたちを　つくろう</p>
+          <a href="https://clearfstudio.github.io/manalot-sankaku/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>さんかくを　かいてんさせて　ならべよう<br>ならべて　いろいろな　かたちを　つくろう</p>
-        <a href="https://clearfstudio.github.io/manalot-sankaku/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-      <div class="app-card">
-        <h3>めざせ九九マスター！</h3>
-        <div class="app-thumbnails">
-            <img src="images/kuku1.png" alt="画像" class="thumb">
-            <img src="images/kuku2.png" alt="画像" class="thumb">
+        <div class="app-card">
+          <h3>めざせ九九マスター！</h3>
+          <div class="app-thumbnails">
+              <img src="images/kuku1.png" alt="画像" class="thumb">
+              <img src="images/kuku2.png" alt="画像" class="thumb">
+          </div>
+          <p>九九にちょうせん！<br>九九マスターを　めざして　れんしゅうしよう</p>
+          <a href="https://clearfstudio.github.io/manalot-kuku/main.html" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>九九にちょうせん！<br>九九マスターを　めざして　れんしゅうしよう</p>
-        <a href="https://clearfstudio.github.io/manalot-kuku/main.html" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-    `,
-    social: `
-      <div class="app-card">
-        <h3>都道府県クイズ</h3>
-        <div class="app-thumbnails">
-            <img src="images/map1.png" alt="画像" class="thumb">
-            <img src="images/map2.png" alt="画像" class="thumb">
+      `,
+      social: `
+        <div class="app-card">
+          <h3>都道府県クイズ</h3>
+          <div class="app-thumbnails">
+              <img src="images/map1.png" alt="画像" class="thumb">
+              <img src="images/map2.png" alt="画像" class="thumb">
+          </div>
+          <p>とどうふけんを　あてる　クイズにちょうせん！<br>１ねんせいから　あそべるよ</p>
+          <a href="https://clearfstudio.github.io/manalot-map/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>とどうふけんを　あてる　クイズにちょうせん！<br>１ねんせいから　あそべるよ</p>
-        <a href="https://clearfstudio.github.io/manalot-map/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-    `,
-    other: `
-      <div class="app-card">
-        <h3>自習タイマー</h3>
-        <div class="app-thumbnails">
-            <img src="images/time1.png" alt="画像" class="thumb">
-            <img src="images/time2.png" alt="画像" class="thumb">
+      `,
+      other: `
+        <div class="app-card">
+          <h3>自習タイマー</h3>
+          <div class="app-thumbnails">
+              <img src="images/time1.png" alt="画像" class="thumb">
+              <img src="images/time2.png" alt="画像" class="thumb">
+          </div>
+          <p>べんきょうじかんを　タイマーではかりたいときに　つかってね</p>
+          <a href="https://clearfstudio.github.io/timer/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>べんきょうじかんを　タイマーではかりたいときに　つかってね</p>
-        <a href="https://clearfstudio.github.io/timer/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-    `,
-    smart: `
-      <div class="app-card">
-        <h3>和同開珎　漢字パズル <span class="mobile-mark">📱</span>スマホたいおう</h3>
-        <div class="app-thumbnails">
-            <img src="images/kanji1.png" alt="画像" class="thumb">
-            <img src="images/kanji2.png" alt="画像" class="thumb">
+      `,
+      smart: `
+        <div class="app-card">
+          <h3>和同開珎　漢字パズル <span class="mobile-mark">📱</span>スマホたいおう</h3>
+          <div class="app-thumbnails">
+              <img src="images/kanji1.png" alt="画像" class="thumb">
+              <img src="images/kanji2.png" alt="画像" class="thumb">
+          </div>
+          <p>矢印の方向に読めるように　４つの熟語を完成させよう！</p>
+          <a href="https://clearfstudio.github.io/manalot-kanjipuzzle/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>矢印の方向に読めるように　４つの熟語を完成させよう！</p>
-        <a href="https://clearfstudio.github.io/manalot-kanjipuzzle/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-      <div class="app-card">
-        <h3>いくつといくつ <span class="mobile-mark">📱</span>スマホたいおう</h3>
-        <div class="app-thumbnails">
-            <img src="images/ikutsu1.png" alt="画像" class="thumb">
-            <img src="images/ikutsu2.png" alt="画像" class="thumb">
+        <div class="app-card">
+          <h3>いくつといくつ <span class="mobile-mark">📱</span>スマホたいおう</h3>
+          <div class="app-thumbnails">
+              <img src="images/ikutsu1.png" alt="画像" class="thumb">
+              <img src="images/ikutsu2.png" alt="画像" class="thumb">
+          </div>
+          <p>かずをつくる　モードと　かずをわける　モードがあるよ<br>なんかいでも　れんしゅうしよう<br>がめんを　よこにして　あそんでね</p>
+          <a href="https://clearfstudio.github.io/manalot-ikutsu/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>かずをつくる　モードと　かずをわける　モードがあるよ<br>なんかいでも　れんしゅうしよう
-          <br>がめんを　よこにして　あそんでね</p>
-        <a href="https://clearfstudio.github.io/manalot-ikutsu/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-      <div class="app-card">
-        <h3>けいさんカード　<span class="mobile-mark">📱</span>スマホたいおう</h3>
-        <div class="app-thumbnails">
-            <img src="images/keisan1.png" alt="画像" class="thumb">
-            <img src="images/keisan2.png" alt="画像" class="thumb">
+        <div class="app-card">
+          <h3>けいさんカード　<span class="mobile-mark">📱</span>スマホたいおう</h3>
+          <div class="app-thumbnails">
+              <img src="images/keisan1.png" alt="画像" class="thumb">
+              <img src="images/keisan2.png" alt="画像" class="thumb">
+          </div>
+          <p>１０までの　シンプルなけいさんカード<br>ぜんぶせいかいするまでの　タイムをはかるよ<br>なんかいでも　れんしゅうしよう<br>たてでも　よこでも　あそべます</p>
+          <a href="https://clearfstudio.github.io/manalot-keisancard/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>１０までの　シンプルなけいさんカード<br>ぜんぶせいかいするまでの　タイムをはかるよ<br>なんかいでも　れんしゅうしよう
-          <br>たてでも　よこでも　あそべます</p>
-        <a href="https://clearfstudio.github.io/manalot-keisancard/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-      <div class="app-card">
-        <h3>めざせ九九マスター！ <span class="mobile-mark">📱</span>スマホよう</h3>
-        <div class="app-thumbnails">
-            <img src="images/kuku1.png" alt="画像" class="thumb">
-            <img src="images/kuku2.png" alt="画像" class="thumb">
+        <div class="app-card">
+          <h3>めざせ九九マスター！ <span class="mobile-mark">📱</span>スマホよう</h3>
+          <div class="app-thumbnails">
+              <img src="images/kuku1.png" alt="画像" class="thumb">
+              <img src="images/kuku2.png" alt="画像" class="thumb">
+          </div>
+          <p>九九にちょうせん！<br>九九マスターを　めざして　れんしゅうしよう<br>がめんを　よこにして　あそんでね</p>
+          <a href="https://clearfstudio.github.io/manalot-kuku/mobile.html" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>九九にちょうせん！<br>九九マスターを　めざして　れんしゅうしよう<br>がめんを　よこにして　あそんでね</p>
-        <a href="https://clearfstudio.github.io/manalot-kuku/mobile.html" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-            <div class="app-card">
-        <h3>自習タイマー　<span class="mobile-mark">📱</span>スマホたいおう</h3>
-        <div class="app-thumbnails">
-            <img src="images/time1.png" alt="画像" class="thumb">
-            <img src="images/time2.png" alt="画像" class="thumb">
+        <div class="app-card">
+          <h3>自習タイマー　<span class="mobile-mark">📱</span>スマホたいおう</h3>
+          <div class="app-thumbnails">
+              <img src="images/time1.png" alt="画像" class="thumb">
+              <img src="images/time2.png" alt="画像" class="thumb">
+          </div>
+          <p>べんきょうじかんを　タイマーではかりたいときに　つかってね</p>
+          <a href="https://clearfstudio.github.io/timer/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
         </div>
-        <p>べんきょうじかんを　タイマーではかりたいときに　つかってね</p>
-        <a href="https://clearfstudio.github.io/timer/" class="play-button" target="_blank" rel="noopener">▶ あそぶ</a>
-      </div>
-    `
-  };
+      `
+    };
 
+    // クリックで右側に描画 & 選択状態を更新
+    const main = document.getElementById('main-content');
+    const buttons = document.querySelectorAll('.genre-btn');
 
-  document.querySelectorAll('.genre-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const genre = btn.dataset.genre;
-      if (genre && genreTemplates[genre]) {
-        document.getElementById('main-content').innerHTML = genreTemplates[genre];
-      }
+    function setActive(btn){
+      buttons.forEach(b => b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+    }
+
+    buttons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const genre = btn.dataset.genre;
+        if(genre && genreTemplates[genre]){
+          setActive(btn);
+          main.innerHTML = genreTemplates[genre];
+          // スクロール（モバイルで下に埋まらないように）
+          main.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+      // キーボード操作にも優しく
+      btn.addEventListener('keydown',(e)=>{
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); btn.click(); }
+      });
     });
-  });
-
-</script>
+  </script>
 </body>
 </html>
